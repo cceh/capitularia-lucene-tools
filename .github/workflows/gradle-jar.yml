@@ -1,0 +1,46 @@
+name: Java Jar
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    env:
+      LANG: en_US.UTF-8
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        java: [17]
+        # os: [ubuntu-latest, macos-latest, windows-latest]
+        # java: [8, 11, 17, 21]
+
+    steps:
+      - name: Set up JDK ${{ matrix.java }}
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: ${{ matrix.java }}
+
+      - name: Checkout
+        run: |
+          git clone https://github.com/$GITHUB_REPOSITORY.git
+
+      - name: Generate release tag
+        id: tag
+        run: |
+          echo "RELEASE_TAG=0.0.1" >> $GITHUB_ENV
+
+      - name: Build
+        run: |
+          ./gradlew jar
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          files: |
+            lib/build/libs/*.jar
