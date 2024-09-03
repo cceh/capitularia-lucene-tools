@@ -27,7 +27,7 @@ jobs:
 
       - name: Checkout
         run: |
-          git clone https://github.com/$GITHUB_REPOSITORY.git
+          git clone https://github.com/$GITHUB_REPOSITORY.git repo
 
       - name: Generate release tag
         id: tag
@@ -36,7 +36,7 @@ jobs:
 
       - name: Build
         run: |
-          cd $GITHUB_REPOSITORY
+          cd repo
           ./gradlew jar
 
       - name: Release
@@ -44,4 +44,4 @@ jobs:
         with:
           tag_name: ${{ env.RELEASE_TAG }}
           files: |
-            $GITHUB_REPOSITORY/lib/build/libs/*.jar
+            repo/lib/build/libs/*.jar
