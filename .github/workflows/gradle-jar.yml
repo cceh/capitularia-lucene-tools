@@ -36,6 +36,7 @@ jobs:
 
       - name: Build
         run: |
+          cd $GITHUB_REPOSITORY
           ./gradlew jar
 
       - name: Release
@@ -43,4 +44,4 @@ jobs:
         with:
           tag_name: ${{ env.RELEASE_TAG }}
           files: |
-            lib/build/libs/*.jar
+            $GITHUB_REPOSITORY/lib/build/libs/*.jar
