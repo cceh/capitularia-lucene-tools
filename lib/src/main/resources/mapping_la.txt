@@ -1,0 +1,19 @@
+# normalize latin
+
+"v"  => "u"
+"j"  => "i"
+"k"  => "c"
+"ae" => "e"
+"æ"  => "e"
+"oe" => "e"
+"œ"  => "e"
+"ę"  => "e"
+
+"duodecim"      => "12"
+"uiginti"       => "20"
+"triginta"      => "30"
+"quadraginta"   => "40"
+"sexaginta"     => "60"
+"sexcentos"     => "600"
+
+"ecles"         => "eccles"
