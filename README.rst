@@ -1,4 +1,4 @@
-capitularia-lucene-tools
+Capitularia Lucene Tools
 ========================
 
 This project contains:
@@ -9,7 +9,7 @@ This project contains:
 
 The Latin stemmer uses an algorithm by Schinke et al.
 
-..seealso::
+.. seealso::
 
     Schinke R, Greengrass M, Robertson AM and Willett P (1996)
     :title:`A stemming algorithm for Latin text databases.`
