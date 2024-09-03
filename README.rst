@@ -10,7 +10,7 @@ This project contains:
 Latin Stem Filter
 -----------------
 
-Usage example in :code:`schema.xml`:
+Usage example in :code:`conf/schema.xml`:
 
 .. code-block:: xml
 
@@ -23,7 +23,9 @@ Usage example in :code:`schema.xml`:
         </analyzer>
     </fieldType>
 
-The stemmer uses an algorithm by Schinke et al. See:
+The stemmer uses an algorithm by Schinke et al.
+
+See:
 
     Schinke R, Greengrass M, Robertson AM and Willett P (1996)
     :title:`A stemming algorithm for Latin text databases.`
@@ -37,7 +39,7 @@ Roman Numerals Filter
 
 The filter will convert roman :code:`XLII` to arabic :code:`42`.
 
-Usage example in :code:`schema.xml`:
+Usage example in :code:`conf/schema.xml`:
 
 .. code-block:: xml
 
@@ -54,8 +56,7 @@ Usage example in :code:`schema.xml`:
 Sorting Value Source
 --------------------
 
-The value source generates a string that can be used as a key to sort strings correctly
-like this:
+The value source generates strings that sort correctly when used as keys, like this:
 
 #. paris-bn-lat-4638
 #. paris-bn-lat-10528
@@ -65,7 +66,7 @@ instead of alphabetically, like this:
 #. paris-bn-lat-10528
 #. paris-bn-lat-4638
 
-Usage example in :code:`solrconfig.xml`:
+Usage example in :code:`conf/solrconfig.xml`:
 
 .. code-block:: xml
 
