@@ -7,9 +7,23 @@ This project contains:
 - a filter that converts roman numerals into arabic ones, and
 - a value source that correctly sorts strings with numbers.
 
-The Latin stemmer uses an algorithm by Schinke et al.
+Latin Stem Filter
+-----------------
 
-.. seealso::
+Usage example in :code:`schema.xml`:
+
+.. code-block:: xml
+
+    <fieldType name="text_la_stem" class="solr.TextField" positionIncrementGap="100">
+        <analyzer>
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+            <filter class="de.uni_koeln.capitularia.lucene_tools.LatinStemFilterFactory"
+                    preserveOriginal="true" minNounSize="3" minVerbSize="3"/>
+        </analyzer>
+    </fieldType>
+
+The stemmer uses an algorithm by Schinke et al. See:
 
     Schinke R, Greengrass M, Robertson AM and Willett P (1996)
     :title:`A stemming algorithm for Latin text databases.`
@@ -17,7 +31,28 @@ The Latin stemmer uses an algorithm by Schinke et al.
 
     https://snowballstem.org/otherapps/schinke/
 
-The filter will convert roman "XLII" to arabic "42".
+
+Roman Numerals Filter
+---------------------
+
+The filter will convert roman :code:`XLII` to arabic :code:`42`.
+
+Usage example in :code:`schema.xml`:
+
+.. code-block:: xml
+
+    <fieldType name="text_la_stem" class="solr.TextField" positionIncrementGap="100">
+        <analyzer>
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+            <filter class="de.uni_koeln.capitularia.lucene_tools.RomanNumeralsFilterFactory"
+                    preserveOriginal="true"/>
+        </analyzer>
+    </fieldType>
+
+
+Sorting Value Source
+--------------------
 
 The value source generates a string that can be used as a key to sort strings correctly
 like this:
@@ -29,3 +64,17 @@ instead of alphabetically, like this:
 
 #. paris-bn-lat-10528
 #. paris-bn-lat-4638
+
+Usage example in :code:`solrconfig.xml`:
+
+.. code-block:: xml
+
+    <config>
+        <valueSourceParser
+            name="strnumsort"
+            class="de.uni_koeln.capitularia.lucene_tools.StringNumberSortValueSourceParser"
+        />
+        ...
+    </config>
+
+In the query set the :code:`sort` parameter to: :code:`strnumsort(my_alphanum_id) asc`

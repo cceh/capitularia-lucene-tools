@@ -29,15 +29,26 @@ dependencies {
     testImplementation("org.apache.solr:solr-test-framework:9.6.1")
 }
 
-// Apply a specific Java toolchain to ease working on different environments.
+base {
+    archivesName = "capitularia-lucene-tools"
+}
+
 java {
+    withJavadocJar()
+    withSourcesJar()
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
-tasks.jar {
-    archiveBaseName.set("capitularia-lucene-tools")
+tasks.withType<Javadoc> {
+    options {
+        this as StandardJavadocDocletOptions
+        addStringOption(
+            "tag",
+            "lucene.spi:t:SPI Name:"
+        )
+    }
 }
 
 tasks.named<Test>("test") {

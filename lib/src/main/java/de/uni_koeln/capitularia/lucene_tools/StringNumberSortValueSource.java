@@ -30,7 +30,9 @@ import org.apache.lucene.search.SortField;
  * </pre>
  */
 public final class StringNumberSortValueSource extends SingleFunction {
+    /** The name of the value source */
     public static final String NAME = "strnumsort";
+    /** The regex pattern used to find the numbers to convert */
     public static final Pattern REGEX = Pattern.compile("\\d+");
 
     /**
@@ -46,6 +48,13 @@ public final class StringNumberSortValueSource extends SingleFunction {
       return NAME;
     }
 
+    /**
+     * Replaces the numbers with keys that sort correctly.
+     * @param doc The document
+     * @param vals The function values
+     * @return The string with numbers replaced
+     * @throws IOException If anything bad happened in strVal
+     */
     protected String func(int doc, FunctionValues vals) throws IOException {
         String s = vals.strVal(doc);
         return REGEX.matcher(s).replaceAll(mr -> mr.group().length() + mr.group());

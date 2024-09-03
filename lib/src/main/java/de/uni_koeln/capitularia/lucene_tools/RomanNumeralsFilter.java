@@ -13,6 +13,7 @@ import org.apache.lucene.analysis.tokenattributes.KeywordAttribute;
  * This filter replaces roman numerals with arabic ones, eg. "XLII" => "42"
  */
 public final class RomanNumeralsFilter extends TokenFilter {
+    /** The default for the parameter preserveOriginal */
     public static final boolean DEFAULT_PRESERVE_ORIGINAL = false;
 
     private final CharTermAttribute termAttr;
@@ -23,6 +24,10 @@ public final class RomanNumeralsFilter extends TokenFilter {
     private String original;
     private State state;
 
+    /**
+     * Constructor
+     * @param input The input token stream
+     */
     protected RomanNumeralsFilter(TokenStream input) {
         this(
             input,
@@ -30,6 +35,11 @@ public final class RomanNumeralsFilter extends TokenFilter {
         );
     }
 
+    /**
+     * Constructor
+     * @param input The input token stream
+     * @param preserveOriginal Preserves the original word if true
+     */
     protected RomanNumeralsFilter(TokenStream input, boolean preserveOriginal) {
         super(input);
         this.preserveOriginal = preserveOriginal;

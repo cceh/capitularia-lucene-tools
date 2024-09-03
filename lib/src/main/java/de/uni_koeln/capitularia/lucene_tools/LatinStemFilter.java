@@ -18,8 +18,11 @@ import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
  * See: {@link LatinStemmer}
  */
 public final class LatinStemFilter extends TokenFilter {
+    /** The default for the parameter minNounSize */
     public static final int DEFAULT_MIN_NOUN_SIZE = 2;
+    /** The default for the parameter minVerbSize */
     public static final int DEFAULT_MIN_VERB_SIZE = 2;
+    /** The default for the parameter preserveOriginal */
     public static final boolean DEFAULT_PRESERVE_ORIGINAL = true;
 
     private static final Locale LOCALE =
@@ -36,6 +39,10 @@ public final class LatinStemFilter extends TokenFilter {
     private final Deque<String> stack = new ArrayDeque<>();
     private State state;
 
+    /**
+     * Constructor
+     * @param input The input token stream
+     */
     protected LatinStemFilter(TokenStream input) {
         this(
             input,
@@ -45,6 +52,13 @@ public final class LatinStemFilter extends TokenFilter {
         );
     }
 
+    /**
+     * Constructor
+     * @param input The input token stream
+     * @param minNounSize The minimum noun size to stem
+     * @param minVerbSize The minimum verb size to stem
+     * @param preserveOriginal Preserves the original word if true
+     */
     protected LatinStemFilter(
             TokenStream input,
             int minNounSize,

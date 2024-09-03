@@ -14,6 +14,7 @@ import org.apache.solr.search.ValueSourceParser;
  * <pre>
  * {@code <valueSourceParser name="strnumsort"
  *    class="de.uni_koeln.capitularia.lucene_tools.StringNumberSortValueSourceParser" />}
+ * </pre>
  */
 public final class StringNumberSortValueSourceParser extends ValueSourceParser {
     /**
