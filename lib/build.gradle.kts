@@ -36,6 +36,10 @@ java {
     }
 }
 
+tasks.jar {
+    archiveBaseName.set("capitularia-lucene-tools")
+}
+
 tasks.named<Test>("test") {
     // lucene still uses JUnit 4
     useJUnit()
